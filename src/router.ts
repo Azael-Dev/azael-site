@@ -1,60 +1,39 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomePage from './views/HomePage.vue'
 
+interface LinkConfig {
+    path: string
+    name: string
+    envKey: keyof ImportMetaEnv
+}
+
+const linkConfigs: LinkConfig[] = [
+    // Internal Links
+    { path: 'cfx-store', name: 'CFXStore', envKey: 'VITE_CFX_STORE_URL' },
+    { path: 'cfx-bandb', name: 'BanDB', envKey: 'VITE_BAN_DB_URL' },
+    { path: 'docs', name: 'Docs', envKey: 'VITE_DOCS_URL' },
+    { path: 'status', name: 'Status', envKey: 'VITE_STATUS_URL' },
+    // External Links
+    { path: 'discord', name: 'Discord', envKey: 'VITE_DISCORD_URL' },
+    { path: 'github', name: 'Github', envKey: 'VITE_GITHUB_URL' },
+]
+
+const createRedirectRoute = (config: LinkConfig): RouteRecordRaw => ({
+    path: `/links/${config.path}`,
+    name: config.name,
+    component: { template: '<div></div>' },
+    beforeEnter: () => {
+        window.location.href = import.meta.env[config.envKey]
+    }
+})
+
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'Home',
         component: HomePage
     },
-    {
-        path: '/links/discord',
-        name: 'Discord',
-        component: { template: '<div></div>' },
-        beforeEnter: () => {
-            window.location.href = import.meta.env.VITE_DISCORD_URL
-        }
-    },
-    {
-        path: '/links/github',
-        name: 'Github',
-        component: { template: '<div></div>' },
-        beforeEnter: () => {
-            window.location.href = import.meta.env.VITE_GITHUB_URL
-        }
-    },
-    {
-        path: '/links/cfx-store',
-        name: 'CFXStore',
-        component: { template: '<div></div>' },
-        beforeEnter: () => {
-            window.location.href = import.meta.env.VITE_CFX_STORE_URL
-        }
-    },
-    {
-        path: '/links/cfx-bandb',
-        name: 'BanDB',
-        component: { template: '<div></div>' },
-        beforeEnter: () => {
-            window.location.href = import.meta.env.VITE_BAN_DB_URL
-        }
-    },
-    {
-        path: '/links/docs',
-        name: 'Docs',
-        component: { template: '<div></div>' },
-        beforeEnter: () => {
-            window.location.href = import.meta.env.VITE_DOCS_URL
-        }
-    },
-    {
-        path: '/links/status',
-        name: 'Status',
-        component: { template: '<div></div>' },
-        beforeEnter: () => {
-            window.location.href = import.meta.env.VITE_STATUS_URL
-        }
-    },
+    ...linkConfigs.map(createRedirectRoute),
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
