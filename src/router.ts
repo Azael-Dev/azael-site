@@ -54,6 +54,11 @@ const routes: RouteRecordRaw[] = [
         beforeEnter: () => {
             window.location.href = import.meta.env.VITE_STATUS_URL
         }
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        redirect: '/'
     }
 ]
 
