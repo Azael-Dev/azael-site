@@ -6,10 +6,11 @@
     "scripts": {
         "dev": "vite --host 0.0.0.0",
         "build": "vue-tsc -b && vite build",
-        "preview": "vite preview"
+        "preview": "vite preview --host 0.0.0.0"
     },
     "dependencies": {
-        "vue": "^3.5.26"
+        "vue": "^3.5.26",
+        "vue-router": "^4.6.4"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.1.18",
