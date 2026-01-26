@@ -1,7 +1,14 @@
 {
     "name": "azael-portal",
-    "private": true,
     "version": "1.0.6",
+    "description": "The personal portal website of Azael Dev.",
+    "author": "Azael Dev <contact@azael.dev> (https://azael.dev)",
+    "homepage": "https://portal.azael.dev",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Azael-Dev/azael-portal.git"
+    },
+    "private": true,
     "type": "module",
     "scripts": {
         "dev": "vite --host 0.0.0.0",
