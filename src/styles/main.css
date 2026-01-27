@@ -279,21 +279,31 @@ body {
 
 /* Alert slide animation - from top */
 .alert-slide-enter-active {
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .alert-slide-leave-active {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .alert-slide-enter-from {
     opacity: 0;
-    transform: translate(-50%, -120%) scale(0.9);
+    transform: translateY(-120%);
+}
+
+.alert-slide-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alert-slide-leave-from {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .alert-slide-leave-to {
     opacity: 0;
-    transform: translate(-50%, -100%) scale(0.95);
+    transform: translateY(-120%);
 }
 
 /* Service tag hover effect */

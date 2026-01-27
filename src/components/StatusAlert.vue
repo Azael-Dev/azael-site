@@ -176,7 +176,7 @@ onMounted(() => {
             (hasStatusAlert.value || !isAlertDismissed(activeIssue.value!.id))) {
             isVisible.value = true
         }
-    }, 1200)
+    }, 1500)
 })
 
 // Watch for issues loaded
@@ -184,7 +184,7 @@ const checkAndShowAlert = () => {
     if ((hasStatusAlert.value || activeIssue.value)) {
         setTimeout(() => {
             isVisible.value = true
-        }, 1200)
+        }, 1500)
     }
 }
 
