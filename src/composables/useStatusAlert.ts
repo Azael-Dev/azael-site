@@ -19,6 +19,7 @@ export interface StatusIssue {
 export interface ParsedStatusInfo {
     start?: Date
     end?: Date
+    expectedDown?: string[]
     expectedDegraded?: string[]
     description: string
 }
@@ -60,7 +61,16 @@ export function useStatusAlert() {
                 result.end = new Date(endMatch[1].trim())
             }
 
-            // Parse expected degraded services
+            // Parse expected down services (completely unavailable)
+            const downMatch = metadata.match(/expectedDown:\s*(.+)/)
+            if (downMatch) {
+                result.expectedDown = downMatch[1]
+                    .trim()
+                    .split(',')
+                    .map(s => s.trim())
+            }
+
+            // Parse expected degraded services (partially affected)
             const degradedMatch = metadata.match(/expectedDegraded:\s*(.+)/)
             if (degradedMatch) {
                 result.expectedDegraded = degradedMatch[1]
@@ -200,6 +210,24 @@ export function useStatusAlert() {
         return issues.value.find(issue => !isAlertDismissed(issue.id)) || null
     }
 
+    /**
+     * Get affected services from issue labels (for status type)
+     * Excludes system labels like 'status', 'maintenance'
+     */
+    const getAffectedServicesFromLabels = (labels: StatusIssue['labels']): string[] => {
+        const systemLabels = ['status', 'maintenance', 'bug', 'enhancement', 'help wanted', 'question']
+        return labels
+            .filter(l => !systemLabels.includes(l.name.toLowerCase()))
+            .map(l => l.name)
+    }
+
+    /**
+     * Get all status issues (for showing multiple issues)
+     */
+    const getAllActiveIssues = (): StatusIssue[] => {
+        return issues.value.filter(issue => !isAlertDismissed(issue.id))
+    }
+
     onMounted(() => {
         fetchStatusIssues()
     })
@@ -217,6 +245,8 @@ export function useStatusAlert() {
         fetchStatusIssues,
         dismissAlert,
         isAlertDismissed,
-        getActiveIssue
+        getActiveIssue,
+        getAffectedServicesFromLabels,
+        getAllActiveIssues
     }
 }
