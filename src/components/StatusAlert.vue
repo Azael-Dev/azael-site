@@ -143,6 +143,15 @@ const statusText = computed(() => {
     return 'Notice'
 })
 
+// Display title (cleaned)
+const displayTitle = computed(() => {
+    const title = activeIssue.value?.title
+    
+    return title
+        ? title.replace(/\[Scheduled Maintenance\]\s*/g, '')
+        : 'No title available'
+})
+
 // Combined services (down + degraded) for display
 const hasAffectedServices = computed(() => {
     return (parsedInfo.value?.expectedDown?.length || 0) > 0 ||
@@ -265,7 +274,7 @@ watch(issues, checkAndShowAlert)
                                     alertStyles.badgeBg,
                                     alertStyles.textColor
                                 ]">
-                                    <i :class="[alertStyles.icon, 'mr-1.5 text-[10px]']"></i>
+                                    <!-- <i :class="[alertStyles.icon, 'mr-1.5 text-[10px]']"></i> -->
                                     {{ statusText }}
                                 </span>
                                 <span v-if="alertType === 'status' && allStatusIssues.length > 1" 
@@ -279,7 +288,7 @@ watch(issues, checkAndShowAlert)
                                 Some services are currently experiencing issues
                             </h3>
                             <h3 v-else-if="activeIssue" class="text-white font-semibold text-sm leading-snug mb-2">
-                                {{ activeIssue.title }}
+                                {{ displayTitle }}
                             </h3>
 
                             <!-- Time Range (for maintenance) -->
