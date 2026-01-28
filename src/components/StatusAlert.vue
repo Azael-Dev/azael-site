@@ -372,12 +372,15 @@ watch(issues, checkAndShowAlert)
                                     <div class="space-y-2">
                                         <div v-for="(service, index) in allStatusAffectedServices" :key="index"
                                             class="flex items-center justify-between p-3 rounded-xl bg-red-500/10 border border-red-500/20 transition-all duration-200 hover:bg-red-500/15">
-                                            <div class="flex items-center gap-3">
-                                                <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
-                                                <span class="text-sm text-red-300 font-medium">{{ service.name }}</span>
+                                            <div class="flex items-center gap-3 flex-1 min-w-0">
+                                                <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse flex-shrink-0"></span>
+                                                <div class="flex-1 min-w-0">
+                                                    <div class="text-sm text-red-300 font-medium">{{ service.name }}</div>
+                                                    <div class="text-xs text-gray-400 truncate mt-0.5">{{ service.issueTitle }}</div>
+                                                </div>
                                             </div>
                                             <a :href="service.issueUrl" target="_blank" rel="noopener noreferrer"
-                                                class="text-xs text-gray-500 hover:text-red-400 transition-colors flex items-center gap-1">
+                                                class="text-xs text-gray-500 hover:text-red-400 transition-colors flex items-center gap-1 flex-shrink-0 ml-2">
                                                 <span class="hidden sm:inline">View Details</span>
                                                 <i class="fas fa-external-link-alt text-[10px]"></i>
                                             </a>
