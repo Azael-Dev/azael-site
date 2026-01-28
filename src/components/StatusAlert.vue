@@ -73,16 +73,16 @@ const alertStyles = computed(() => {
     // Maintenance - upcoming (blue) vs active (amber)
     if (alertType.value === 'maintenance') {
         if (isMaintenanceUpcoming.value) {
-            // Upcoming maintenance - use blue color
+            // Upcoming maintenance - use blue/primary color
             return {
-                bgColor: 'bg-blue-500/10',
-                borderColor: 'border-blue-500/40',
-                textColor: 'text-blue-400',
-                iconColor: 'text-blue-400',
+                bgColor: 'bg-primary-500/10',
+                borderColor: 'border-primary-500/40',
+                textColor: 'text-primary-400',
+                iconColor: 'text-primary-400',
                 icon: 'fas fa-calendar-alt',
-                glowColor: 'rgba(59, 130, 246, 0.15)',
-                badgeBg: 'bg-blue-500/20',
-                pulseColor: 'bg-blue-500'
+                glowColor: 'rgba(20, 184, 166, 0.15)',
+                badgeBg: 'bg-primary-500/20',
+                pulseColor: 'bg-primary-500'
             }
         } else {
             // Active maintenance - use amber color
@@ -319,12 +319,12 @@ watch(issues, checkAndShowAlert)
                                         :class="[
                                             'service-tag inline-flex items-center px-2.5 py-1 rounded-lg text-xs border',
                                             isMaintenanceUpcoming
-                                                ? 'bg-blue-500/15 text-blue-300 border-blue-500/30'
+                                                ? 'bg-primary-500/15 text-primary-300 border-primary-500/30'
                                                 : 'bg-amber-500/15 text-amber-300 border-amber-500/30'
                                         ]">
                                         <span :class="[
                                             'w-1.5 h-1.5 rounded-full mr-1.5',
-                                            isMaintenanceUpcoming ? 'bg-blue-400' : 'bg-amber-400'
+                                            isMaintenanceUpcoming ? 'bg-primary-400' : 'bg-amber-400'
                                         ]"></span>
                                         {{ service }}
                                     </span>
@@ -409,7 +409,7 @@ watch(issues, checkAndShowAlert)
                                     <div v-if="parsedInfo?.expectedDegraded?.length">
                                         <p :class="[
                                             'text-xs mb-2 flex items-center font-medium',
-                                            isMaintenanceUpcoming ? 'text-blue-400' : 'text-amber-400'
+                                            isMaintenanceUpcoming ? 'text-primary-400' : 'text-amber-400'
                                         ]">
                                             <i class="fas fa-exclamation-circle mr-1.5"></i>
                                             May Be Affected
@@ -419,12 +419,12 @@ watch(issues, checkAndShowAlert)
                                                 :class="[
                                                     'inline-flex items-center px-3 py-1.5 rounded-xl text-xs border',
                                                     isMaintenanceUpcoming
-                                                        ? 'bg-blue-500/15 text-blue-300 border-blue-500/30'
+                                                        ? 'bg-primary-500/15 text-primary-300 border-primary-500/30'
                                                         : 'bg-amber-500/15 text-amber-300 border-amber-500/30'
                                                 ]">
                                                 <span :class="[
                                                     'w-1.5 h-1.5 rounded-full mr-2',
-                                                    isMaintenanceUpcoming ? 'bg-blue-400' : 'bg-amber-400'
+                                                    isMaintenanceUpcoming ? 'bg-primary-400' : 'bg-amber-400'
                                                 ]"></span>
                                                 {{ service }}
                                             </span>
