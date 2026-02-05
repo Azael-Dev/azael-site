@@ -43,7 +43,7 @@ onBeforeUnmount(() => {
     }
 })
 
-const handleClick = (event: MouseEvent) => {
+const handleClick = () => {
     emit('click', props.url)
 }
 
