@@ -4,6 +4,7 @@ interface ImportMetaEnv {
     readonly VITE_DISCORD_URL: string
     readonly VITE_GITHUB_URL: string
     readonly VITE_CFX_STORE_URL: string
+    readonly VITE_CFX_SERVERS_URL: string
     readonly VITE_BAN_DB_URL: string
     readonly VITE_DOCS_URL: string
     readonly VITE_STATUS_URL: string

@@ -22,6 +22,12 @@ const sites: Site[] = [
         description: 'จำหน่ายทรัพยากรสำหรับแพลตฟอร์ม FiveM/RedM ที่พัฒนาโดยเรา เหมาะสำหรับนักพัฒนาและเจ้าของเซิร์ฟเวอร์ทุกระดับ'
     },
     {
+        url: import.meta.env.VITE_CFX_SERVERS_URL,
+        icon: 'fas fa-server',
+        title: 'CFX Servers',
+        description: 'ค้นหาและตรวจสอบข้อมูลเซิร์ฟเวอร์ FiveM/RedM พร้อมรายละเอียดสถานะและข้อมูลที่เกี่ยวข้องแบบเรียลไทม์'
+    },
+    {
         url: import.meta.env.VITE_BAN_DB_URL,
         icon: 'fas fa-database',
         title: 'CFX BanDB',
@@ -70,8 +76,16 @@ onMounted(() => {
 
                 <!-- Sites Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-12 items-start">
-                    <SiteCard v-for="(site, index) in sites" :key="site.url" :url="site.url" :icon="site.icon"
+                    <SiteCard v-for="(site, index) in sites.slice(0, 4)" :key="site.url" :url="site.url" :icon="site.icon"
                         :title="site.title" :description="site.description" :delay="(index + 1) * 0.1" />
+                </div>
+
+                <!-- Remaining Cards (centered) -->
+                <div v-if="sites.length > 4" class="flex flex-wrap justify-center gap-6 -mt-6 mb-12 items-start">
+                    <div v-for="(site, index) in sites.slice(4)" :key="site.url" class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
+                        <SiteCard :url="site.url" :icon="site.icon"
+                            :title="site.title" :description="site.description" :delay="(index + 5) * 0.1" />
+                    </div>
                 </div>
 
                 <!-- Footer -->
